@@ -1,1 +1,6 @@
-
+Pour fair la multiplication de matrice de taille n x n, le CPU et le GPU à n^3 operation à faire.
+Le CPU prend beaucoup plus de temps que le GPU à faire les operation.
+Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est threat par block est grand
+plus le temps de calcul sera grand car chaque noyau font des opération en meme temps. Donc la charge de calcule est divisé.
+Mais le nombre de block n'est pas limité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps.
+Le temps de calcul du GPU pour une matrice grande n'est pas linéaire.
