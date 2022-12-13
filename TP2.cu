@@ -9,12 +9,12 @@
 void VectInit(float *M, int n, int etat){
     if(etat==1){
         for(int i=0;i<n;i++){
-            M[i] = (float)rand()/(float)(RAND_MAX); //value between 0 and 1
+            M[i] = (float)rand()/(float)(RAND_MAX)*2-1; //value between -1 and 1
         }
     }
     else{
         for(int i=0;i<n;i++){
-            M[i] = 0; 
+            M[i] = 0.0; 
         }
     }
 }
@@ -32,6 +32,10 @@ void MatrixPrint(float *M, int x, int y, int z){
     printf("\n");
 }
 
+__device__ float activation_tanh(float M){
+    return (1-exp(-2*M))/(1+exp(-2*M));
+}
+
 __global__ void Conv2D(float* M, float* kernel, float* out, int size_matrix, int size_kernel, int size_out){
     // les sizes correspondent à la longueur d'un côté et non la taille totale
     int i = threadIdx.x; // ligne
@@ -42,8 +46,22 @@ __global__ void Conv2D(float* M, float* kernel, float* out, int size_matrix, int
         for(int position_j = 0; position_j<size_kernel; position_j++){
             out[k*size_out*size_out+i*size_out+j] += M[size_matrix*(i+position_i)+j+position_j]*kernel[k*size_kernel*size_kernel+size_kernel*position_i+position_j];
         }
-    }
-                    
+    } 
+    out[k*size_out*size_out+i*size_out+j] =  activation_tanh(out[k*size_out*size_out+i*size_out+j]);         
+}
+
+__global__ void Padding(float* M, float* out, int size_M,int size_out){
+    int i = threadIdx.x; // ligne
+    int j = threadIdx.y; // col
+    out[(i+2)*size_out+j+2] = M[size_M*i + j];
+}
+
+__global__ void AveragePooling(float* C1_data, float* S1_data, int size_C1, int size_S1){
+    int i = threadIdx.x;// ligne
+    int j = threadIdx.y;// col
+    int k = blockIdx.x;// feature
+    int n = size_C1;
+    S1_data[k*size_S1*size_S1+i*size_S1+j] = (C1_data[n*n*k+2*i*n+2*j]+C1_data[n*n*k+(2*i+1)*n+2*j]+C1_data[n*n*k+2*i*n+2*j+1]+C1_data[n*n*k+(2*i+1)*n+2*j+1])*0.25;
 }
 
 int main(){
@@ -52,6 +70,7 @@ int main(){
 
     /*declaration matrix*/
     float* raw_data = (float*)malloc(sizeof(float)*32*32);
+    float* raw_data_padding = (float*)malloc(sizeof(float)*36*36);
     float* C1_data = (float*)malloc(sizeof(float)*6*28*28);
     float* S1_data = (float*)malloc(sizeof(float)*6*14*14);
     float* C1_kernel= (float*)malloc(sizeof(float)*6*5*5);
@@ -62,7 +81,9 @@ int main(){
     float* C1_data_cuda = NULL;
     float* S1_data_cuda = NULL;
     float* C1_kernel_cuda = NULL;
+    float* raw_data_padding_cuda = NULL;
     cudaMalloc((void**)&raw_data_cuda, sizeof(float)*32*32);
+    cudaMalloc((void**)&raw_data_padding_cuda, sizeof(float)*36*36);
     cudaMalloc((void**)&C1_data_cuda, sizeof(float)*6*28*28);
     cudaMalloc((void**)&S1_data_cuda, sizeof(float)*6*14*14);
     cudaMalloc((void**)&C1_kernel_cuda, sizeof(float)*6*5*5);
@@ -70,6 +91,7 @@ int main(){
 
     /*Matrix CPU Initialisation*/
     VectInit(raw_data, 32*32, 1);
+    VectInit(raw_data_padding, 36*36, 0);
     VectInit(C1_data, 6*28*28, 0);
     VectInit(S1_data, 6*14*14, 0);
     VectInit(C1_kernel, 6*5*5, 1);
@@ -77,33 +99,54 @@ int main(){
     
     /*Matrix GPU Initialisation*/
     cudaMemcpy(raw_data_cuda, raw_data, sizeof(float)*32*32, cudaMemcpyHostToDevice);
+    cudaMemcpy(raw_data_padding_cuda, raw_data_padding, sizeof(float)*36*36, cudaMemcpyHostToDevice);
     cudaMemcpy(C1_data_cuda, C1_data, sizeof(float)*6*28*28, cudaMemcpyHostToDevice);
     cudaMemcpy(S1_data_cuda, S1_data, sizeof(float)*6*14*14, cudaMemcpyHostToDevice);
     cudaMemcpy(C1_kernel_cuda, C1_kernel, sizeof(float)*6*5*5, cudaMemcpyHostToDevice);
     /***************************/
 
+    /*apply padding*/
+    dim3 gridDim3_padd(1,1,1);
+    dim3 blockDim3_padd(32,32,1);
+    Padding<<<gridDim3_padd,blockDim3_padd>>>(raw_data_cuda, raw_data_padding_cuda, 32,36);
+    cudaMemcpy(raw_data_padding, raw_data_padding_cuda, sizeof(float)*36*36, cudaMemcpyDeviceToHost);
+    /***************/
+
     /*Matrix Convolution*/
-    dim3 gridDim2(6,1);
-    dim3 blockDim2(32,32);
-    Conv2D<<<gridDim2,blockDim2>>>(raw_data_cuda, C1_kernel_cuda, C1_data_cuda, 32, 5, 28);
+    dim3 gridDim3_conv(6,1,1);
+    dim3 blockDim3_conv(28,28,1);
+    Conv2D<<<gridDim3_conv,blockDim3_conv>>>(raw_data_cuda, C1_kernel_cuda, C1_data_cuda, 32, 5, 28);
     cudaMemcpy(C1_data, C1_data_cuda, sizeof(float)*6*28*28, cudaMemcpyDeviceToHost);
     /********************/
+
+    /*Matrix average pooling*/
+    dim3 gridDim3_pool(6,1,1);
+    dim3 blockDim3_pool(14,14,1);
+    AveragePooling<<<gridDim3_pool,blockDim3_pool>>>(C1_data_cuda, S1_data_cuda, 28, 14);
+    cudaMemcpy(S1_data, S1_data_cuda, sizeof(float)*6*14*14, cudaMemcpyDeviceToHost);
+    /************************/
 
     /*Matrix print*/
     printf("\nRaw data \n");
     MatrixPrint(raw_data, 32, 32, 1);
+    printf("\nRaw data padding \n");
+    MatrixPrint(raw_data_padding, 36, 36, 1);
     printf("\nC1_kernel \n");
     MatrixPrint(C1_kernel, 5, 5, 6);
     printf("\nC1_data \n");
     MatrixPrint(C1_data, 28, 28, 6);
+    printf("\nS1_data \n");
+    MatrixPrint(S1_data, 14, 14, 6);
     /**************/
 
     /*free memory*/
     free(raw_data);
+    free(raw_data_padding);
     free(C1_data);
     free(S1_data);
     free(C1_kernel);
     cudaFree(raw_data_cuda);
+    cudaFree(raw_data_padding_cuda);
     cudaFree(C1_data_cuda);
     cudaFree(S1_data_cuda);
     cudaFree(C1_kernel_cuda);
