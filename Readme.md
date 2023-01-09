@@ -15,7 +15,7 @@ La lecture de l'article suivant apporte les informations nécessaires pour compr
 https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architecture
 ![Alt text](readme_files/LeNet-5.png)
 ### Layer 3
-Attention, contraitement à ce qui est décrit dans l'article, la 3eme couche du CNN prendra en compte tous les features pour chaque sortie
+Attention, contrairement à ce qui est décrit dans l'article, la 3e couche du CNN prend en compte tous les features pour chaque sortie.
 
 ## Notes
 Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU à n^3 operation à faire.
