@@ -3,14 +3,14 @@
 ### Ce dépôt est projet scolaire et a été réalisé avec Ossama durant la 3e année à l'ENSEA. https://github.com/OssamaChrifi
 
 #### Les objectifs visés sont les suivants :
-* Apprendre à utiliser CUDA,
-* Etudier la complexité de vos algorithmes et l'accélération obtenue sur GPU par rapport à une éxécution sur CPU,
-* Observer les limites de l'utilisation d'un GPU,
-* Implémenter "from scratch" un CNN : seulement la partie inférence et non l'entrainement,
+* Apprendre à utiliser CUDA
+* Etudier la complexité de vos algorithmes et l'accélération obtenue sur GPU par rapport à une éxécution sur CPU
+* Observer les limites de l'utilisation d'un GPU
+* Implémenter "from scratch" un CNN : seulement la partie inférence et non l'entrainement
 * Exporter des données depuis un notebook python et les réimporter dans un projet cuda
 
 ## Implémentation d'un CNN
-L'objectif final est d'implémenter l'inférence dun CNN très claissque : LeNet-5
+L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNet-5
 La lecture de l'article suivant apportera les informations nécessaires pour comprendre ce réseau de neurone :
 https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architecture
 
