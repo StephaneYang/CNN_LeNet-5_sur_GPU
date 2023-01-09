@@ -9,6 +9,11 @@
 * Implémenter "from scratch" un CNN : seulement la partie inférence et non l'entrainement
 * Exporter des données depuis un notebook python et les réimporter dans un projet cuda
 
+### Le projet est divisé en 3 parties :
+* Partie 1 - Prise en main de Cuda : Multiplication de matrices
+* Partie 2 - Premières couches du réseau de neurone LeNet-5 : Convolution 2D, subsampling et fonction d'activation
+* Partie 3 - Un peu de Python : Importation du dataset MNIST et affichage des données en console, export des poids
+
 ## Implémentation d'un CNN
 L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNet-5
 La lecture de l'article suivant apporte les informations nécessaires pour comprendre ce réseau de neurone :
