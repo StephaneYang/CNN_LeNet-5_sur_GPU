@@ -59,7 +59,7 @@ En supposant que la lecture du .bin se fait float par float (32 bits), on retrou
 ```
 * train-images.idx3-ubyte : base de données MNIST pour le modèle (chiffres manuscrits)
 
-## Notes
+## Notes - Partie 1
 Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU à n^3 operation à faire.
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
 Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est threat par block est grand
