@@ -14,7 +14,7 @@ L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNe
 La lecture de l'article suivant apporte les informations nécessaires pour comprendre ce réseau de neurone :
 https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architecture
 ![Alt text](readme_files/LeNet-5.png)
-###Layer 3
+### Layer 3
 Attention, contraitement à ce qui est décrit dans l'article, la 3eme couche du CNN prendra en compte tous les features pour chaque sortie
 
 ## Notes
