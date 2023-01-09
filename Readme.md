@@ -14,6 +14,8 @@ L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNe
 La lecture de l'article suivant apportera les informations nécessaires pour comprendre ce réseau de neurone :
 https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architecture
 
+![Alt text](readme_files/LeNet-5.png)
+
 ## Notes
 Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU à n^3 operation à faire.
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
