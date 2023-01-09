@@ -14,6 +14,22 @@
 * Partie 2 - Premières couches du réseau de neurone LeNet-5 : Convolution 2D, subsampling et fonction d'activation
 * Partie 3 - Un peu de Python : Importation du dataset MNIST et affichage des données en console, export des poids
 
+## Installation et mise en place
+### Installation
+```sh
+git clone https://github.com/StephaneYang/CNN_LeNet-5_sur_GPU
+```
+### Compilation
+```sh
+nvcc TPx.cu -o TPx
+# avec 'x' = {1,2,3} selon la partie désirée
+```
+### Exécution
+```sh
+./TPx
+# avec 'x' = {1,2,3} selon la partie désirée
+```
+
 ## Implémentation d'un CNN
 L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNet-5
 La lecture de l'article suivant apporte les informations nécessaires pour comprendre ce réseau de neurone :
