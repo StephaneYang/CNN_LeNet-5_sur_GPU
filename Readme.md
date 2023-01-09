@@ -42,11 +42,12 @@ Attention, contrairement à ce qui est décrit dans l'article, la 3e couche du C
 * aide_programmation : dossier contenant des exemmples de programmes utiles et fonctionnels
 * lenet_5_model : dossier contenant le modèle LeNet-5 à importer dans le notebook Jupyter
 * readme_files : fichiers pour les sources de ce readme
-* FashionMNIST_weights.h5 : fichier des poids exportés au format h5(à ignorer)
+* FashionMNIST_weights.h5 : fichier des poids exportés au format h5 (à ignorer)
 * LeNet5.ipynb : notebook jupyter permettant l'entraînement du modèle LeNet-5
 * Readme.md : ce readme
 * TPx.cu : ficher du code CUDA de la partie 'x'
 * TPx : fichier éxecutable de la partie 'x'
+* fashionmnist_model.json : fichier des poids exportés au format JSON (à ignorer)
 * layer_x.bin : fichier des poids exportés en brut de la couche 'x' correspondante (avec 'x' = {0,1,2,3,4,5,6,7})
 Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
 Le fichier .bin correspondant sera comme suit :
