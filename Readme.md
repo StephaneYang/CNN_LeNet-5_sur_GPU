@@ -1,6 +1,6 @@
 # Projet implémentation d'un CNN - LeNet-5 sur GPU
 
-### Ce dépôt est un projet scolaire et a été réalisé avec Ossama durant la 3e année à l'ENSEA. https://github.com/OssamaChrifi
+### Ce dépôt est un projet scolaire et a été réalisé avec Ossama durant la 3e année à l'ENSEA en spécialité SIA. https://github.com/OssamaChrifi
 
 #### Les objectifs visés sont les suivants :
 * Apprendre à utiliser CUDA
@@ -62,12 +62,13 @@ En supposant que la lecture du .bin se fait float par float (32 bits), on retrou
 * train-images.idx3-ubyte : base de données MNIST pour le modèle (chiffres manuscrits)
 
 ## Notes - Partie 1
-Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU ont n^3 opérations à faire.
+Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU ont o(n^3) opérations à faire.
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
 Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est threat par block est grand
 plus le temps de calcul sera grand car chaque noyau font des opération en meme temps. Donc la charge de calcul est divisée.
-Mais le nombre de block n'est pas illimité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps. Tous les blocks étant occupés, il faut attendre qu'une place se libère.
-Le temps de calcul du GPU pour une matrice grande n'est donc pas linéaire.
+Par exemple, pour deux matrices 1000x1000 le temps serait de ... sans parallélisation, tandis qu'avec le GPU (pour 1000 blocks et 1000 threads) le temps serait de ..., ce qui donne un rapport de quasi .... 
+Mais le nombre de blocks n'est pas illimité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps. Tous les blocks étant occupés, il n'y a nul autre choix que d'allouer sur les threads.
+Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire.
 
 ## Notes - Partie 2
 
