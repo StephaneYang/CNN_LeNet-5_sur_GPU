@@ -50,7 +50,7 @@ Attention, contrairement à ce qui est décrit dans l'article, la 3e couche du C
 * fashionmnist_model.json : fichier des poids exportés au format JSON (à ignorer)
 * layer_x.bin : fichier des poids exportés en brut de la couche 'x' correspondante (avec 'x' = {0,1,2,3,4,5,6,7})
 Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
-Le fichier .bin correspondant sera comme suit :
+Le fichier layer_x.bin correspondant sera comme suit :
 ```
 101111111000001010001111010111001011111000111000010100011110110001000000001000001010001111010111...
 ```
@@ -61,9 +61,13 @@ En supposant que la lecture du .bin se fait float par float (32 bits), on retrou
 * train-images.idx3-ubyte : base de données MNIST pour le modèle (chiffres manuscrits)
 
 ## Notes - Partie 1
-Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU à n^3 operation à faire.
+Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU ont n^3 opérations à faire.
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
 Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est threat par block est grand
-plus le temps de calcul sera grand car chaque noyau font des opération en meme temps. Donc la charge de calcule est divisé.
+plus le temps de calcul sera grand car chaque noyau font des opération en meme temps. Donc la charge de calcul est divisée.
 Mais le nombre de block n'est pas limité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps.
 Le temps de calcul du GPU pour une matrice grande n'est pas linéaire.
+
+## Notes - Partie 2
+
+## Notes - Partie 3
