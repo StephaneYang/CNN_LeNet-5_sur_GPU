@@ -32,8 +32,8 @@ nvcc TPx.cu -o TPx
 ```
 
 ## Implémentation d'un CNN
-L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNet-5
-La lecture de l'article suivant apporte les informations nécessaires pour comprendre ce réseau de neurone :
+L'objectif final est d'implémenter l'inférence d'un CNN très classique : LeNet-5. 
+Les informations nécessaires pour comprendre ce réseau de neurone sont apportées par l'article suivant:
 https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architecture
 ![Alt text](readme_files/LeNet-5.png)
 ### Layer 3
