@@ -15,6 +15,7 @@
 * Partie 3 - Un peu de Python : Importation du dataset MNIST et affichage des données en console, export des poids
 
 ## Installation et mise en place
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 ### Installation
 ```sh
 git clone https://github.com/StephaneYang/CNN_LeNet-5_sur_GPU
@@ -65,8 +66,8 @@ Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU ont n^
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
 Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est threat par block est grand
 plus le temps de calcul sera grand car chaque noyau font des opération en meme temps. Donc la charge de calcul est divisée.
-Mais le nombre de block n'est pas limité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps.
-Le temps de calcul du GPU pour une matrice grande n'est pas linéaire.
+Mais le nombre de block n'est pas illimité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps. Tous les blocks étant occupés, il faut attendre qu'une place se libère.
+Le temps de calcul du GPU pour une matrice grande n'est donc pas linéaire.
 
 ## Notes - Partie 2
 
