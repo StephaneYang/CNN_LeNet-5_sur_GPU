@@ -1,6 +1,6 @@
 # Projet implémentation d'un CNN - LeNet-5 sur GPU
 
-### Ce dépôt est projet scolaire et a été réalisé avec Ossama durant la 3e année à l'ENSEA. https://github.com/OssamaChrifi
+### Ce dépôt est un projet scolaire et a été réalisé avec Ossama durant la 3e année à l'ENSEA. https://github.com/OssamaChrifi
 
 #### Les objectifs visés sont les suivants :
 * Apprendre à utiliser CUDA
