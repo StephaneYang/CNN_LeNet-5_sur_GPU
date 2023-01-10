@@ -70,4 +70,5 @@ Le temps de calcul du GPU pour une matrice grande n'est pas linéaire.
 
 ## Notes - Partie 2
 
+
 ## Notes - Partie 3
