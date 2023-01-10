@@ -66,7 +66,7 @@ Pour faire la multiplication de matrice de taille n x n, le CPU et le GPU ont o(
 Le CPU prend beaucoup plus de temps que le GPU à faire les operations.
 Le temps d'operation du GPU depend des nombres de block et de threat par block. Plus le nombre de block est grand (threads par block est faible)
 plus le temps de calcul sera court car chaque noyau feront des opération en meme temps (calculs parallélisées). Donc la charge de calcul est divisée.
-Par exemple, pour deux matrices 1000x1000 le temps serait de ... sans parallélisation, tandis qu'avec le GPU (pour 1000 blocks et 1000 threads) le temps serait de ..., ce qui donne un rapport de quasi .... 
+Par exemple, pour deux matrices 1000x1000 le temps serait de 100µs sans parallélisation, tandis qu'avec le GPU (pour 1000 blocks et 1000 threads) le temps serait de 3ns, ce qui donne un rapport de quasi .... 
 Mais le nombre de blocks n'est pas illimité donc avec un nombre grand comme une matrice de taille 2000 x 2000, le GPU prendra beaucoup plus de temps. Tous les blocks étant occupés, il n'y a nul autre choix que d'allouer sur les threads.
 Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire.
 
