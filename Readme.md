@@ -68,7 +68,9 @@ Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire
 ## Notes - Partie 3
 L'entraînement du réseau LeNet-5 n'étant pas réalisé sous cuda mais à travers un script Jupyter (en se servant de Tensorflow), il faut pouvoir exporter les poids et les exploiter sous CUDA. Nous avons opté de les exporter simplemment dans un fichier binaire pour chaque couche layer_x.bin
 
+
 Exemple pour comprendre son contenu :
+
 Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
 Le fichier layer_x.bin correspondant sera rempli comme suit :
 ```
