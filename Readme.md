@@ -63,7 +63,7 @@ Mais le nombre de blocks n'est pas illimité. Donc avec un nombre grand comme un
 Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire.
 
 ## Notes - Partie 2
-Test de la convolution : Prendre un kernel 5x5 rempli de 1 et vérifier que chaque case de la sortie est bien la somme des 25 cases voisines de l'entrée en les affichant.
+Test de la convolution : Prendre un kernel 5x5 rempli de 1 et vérifier que chaque case de la sortie est bien la somme des 25 cases (au même endroit) de l'entrée en les affichant.
 
 Test de la fonction de sous échantillonnage (max pooling) : vérifier la taille de sortie de la matrice par rapport à l'entrée en les affichant.
 
