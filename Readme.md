@@ -63,7 +63,9 @@ Mais le nombre de blocks n'est pas illimité. Donc avec un nombre grand comme un
 Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire.
 
 ## Notes - Partie 2
+Test de la convolution : Prendre un kernel 5x5 rempli de 1 et vérifier que chaque case de la sortie est bien la somme des 25 cases voisines de l'entrée en les affichant.
 
+Test de la fonction de sous échantillonnage (max pooling) : vérifier la taille de sortie de la matrice par rapport à l'entrée en les affichant.
 
 ## Notes - Partie 3
 L'entraînement du réseau LeNet-5 n'étant pas réalisé sous cuda mais à travers un script Jupyter (en se servant de Tensorflow), il faut pouvoir exporter les poids et les exploiter sous CUDA. Nous avons opté de les exporter simplemment dans un fichier binaire pour chaque couche layer_x.bin
