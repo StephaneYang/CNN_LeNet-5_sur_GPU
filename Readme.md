@@ -49,16 +49,8 @@ Attention, contrairement à ce qui est décrit dans l'article, la 3e couche du C
 * TPx.cu : ficher du code CUDA de la partie 'x'
 * TPx : fichier éxecutable de la partie 'x'
 * fashionmnist_model.json : fichier des poids exportés au format JSON (à ignorer, layer_x.bin est utilisé à la place)
-* layer_x.bin : fichier des poids exportés en brut de la couche 'x' correspondante (avec 'x' = {0,1,2,3,4,5,6,7})
-Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
-Le fichier layer_x.bin correspondant sera comme suit :
-```
-101111111000001010001111010111001011111000111000010100011110110001000000001000001010001111010111...
-```
-En supposant que la lecture du .bin se fait float par float (32 bits), on retrouve bien :
-```
--1.02 -0.81 2.51...
-```
+* layer_x.bin : fichier des poids exportés en brut de la couche 'x' correspondante (avec 'x' = {0,1,2,3,4,5,6,7}) (voir Notes - Partie 3 pour plus d'info)
+
 * train-images.idx3-ubyte : base de données MNIST pour le modèle (chiffres manuscrits)
 
 ## Notes - Partie 1
@@ -74,3 +66,15 @@ Le temps de calcul du GPU pour une matrice très grande n'est donc pas linéaire
 
 
 ## Notes - Partie 3
+L'entraînement du réseau LeNet-5 n'étant pas réalisé sous cuda mais à travers un script Jupyter (en se servant de Tensorflow), il faut pouvoir exporter les poids et les exploiter sous CUDA. Nous avons opté de les exporter simplemment dans un fichier binaire pour chaque couche layer_x.bin
+
+Exemple pour comprendre son contenu :
+Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
+Le fichier layer_x.bin correspondant sera rempli comme suit :
+```
+101111111000001010001111010111001011111000111000010100011110110001000000001000001010001111010111...
+```
+En supposant que la lecture du .bin se fait float par float (32 bits), on retrouve bien :
+```
+-1.02 -0.81 2.51...
+```
