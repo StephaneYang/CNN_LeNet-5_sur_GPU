@@ -6,7 +6,7 @@
 * Apprendre à utiliser CUDA
 * Etudier la complexité des algorithmes et l'accélération obtenue sur GPU par rapport à une éxécution sur CPU
 * Observer les limites de l'utilisation d'un GPU
-* Implémenter "from scratch" un CNN : seulement la partie inférence et non l'entrainement
+* Implémenter "from scratch" un CNN : seulement la partie inférence et non l'entraînement
 * Exporter des données depuis un notebook python et les réimporter dans un projet cuda
 
 ### Le projet est divisé en 3 parties :
@@ -40,15 +40,15 @@ https://www.datasciencecentral.com/profiles/blogs/lenet-5-a-classic-cnn-architec
 Attention, contrairement à ce qui est décrit dans l'article, la 3e couche du CNN prend en compte tous les features pour chaque sortie.
 
 ## Contenu
-* aide_programmation : dossier contenant des exemmples de programmes utiles et fonctionnels
+* aide_programmation : dossier contenant des exemples de programmes utiles et fonctionnels
 * lenet_5_model : dossier contenant le modèle LeNet-5 à importer dans le notebook Jupyter
 * readme_files : fichiers pour les sources de ce readme
-* FashionMNIST_weights.h5 : fichier des poids exportés au format h5 (à ignorer)
+* FashionMNIST_weights.h5 : fichier des poids exportés au format h5 (à ignorer, layer_x.bin est utilisé à la place)
 * LeNet5.ipynb : notebook jupyter permettant l'entraînement du modèle LeNet-5
 * Readme.md : ce readme
 * TPx.cu : ficher du code CUDA de la partie 'x'
 * TPx : fichier éxecutable de la partie 'x'
-* fashionmnist_model.json : fichier des poids exportés au format JSON (à ignorer)
+* fashionmnist_model.json : fichier des poids exportés au format JSON (à ignorer, layer_x.bin est utilisé à la place)
 * layer_x.bin : fichier des poids exportés en brut de la couche 'x' correspondante (avec 'x' = {0,1,2,3,4,5,6,7})
 Si les poids de la couche 1 sont comme suit : w1[0] = -1.02, w1[1] = -0.81, w1[2] = 2.51 ...
 Le fichier layer_x.bin correspondant sera comme suit :
