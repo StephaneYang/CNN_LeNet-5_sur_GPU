@@ -11,7 +11,7 @@
 
 ### Le projet est divisé en 3 parties :
 * Partie 1 - Prise en main de Cuda : Multiplication de matrices
-* Partie 2 - Premières couches du réseau de neurone LeNet-5 : Convolution 2D, subsampling et fonction d'activation
+* Partie 2 - Premières couches du réseau de neurones LeNet-5 : Convolution 2D, subsampling et fonction d'activation
 * Partie 3 - Un peu de Python : Importation du dataset MNIST et affichage des données en console, export des poids
 
 ## Installation et mise en place
