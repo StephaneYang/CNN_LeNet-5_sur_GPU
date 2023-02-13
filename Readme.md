@@ -80,5 +80,9 @@ Le fichier layer_x.bin correspondant sera rempli comme suit :
 ```
 En supposant que la lecture du .bin se fait float par float (32 bits), on retrouve bien :
 ```
+10111111100000101000111101011100 | 10111110001110000101000111101100 | 01000000001000001010001111010111...
+```
+C'est-à-dire :
+```
 -1.02 -0.81 2.51...
 ```
